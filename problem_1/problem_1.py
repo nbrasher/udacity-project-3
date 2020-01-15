@@ -23,13 +23,13 @@ def sqrt(n: int, guess: int = None):
        int: Floored Square Root
     """
     assert isinstance(n, int), 'Must be an integer'
-    assert n > 0, 'Must be a positive integer'
+    assert n >= 0, 'Must be a positive integer'
     
     # If no guess is supplied, get guess from initial_guess algorithm
-    if not guess:
+    if not isinstance(guess, int):
         guess = initial_guess(n)
     else:
-        assert isinstance(guess, int) & (guess > 0)
+        assert guess >= 0
     
     # Check if the guess is the answer, if not use the Babylonian method
     # to update the new guess and iterate
@@ -45,18 +45,20 @@ if __name__ == '__main__':
     assert initial_guess(10000) == 100
     assert initial_guess(1000) == 60
 
-
     # Should return 3
     print(sqrt(9))
 
     # Should return 1
     print(sqrt(1))
 
+    # Should return 0
+    print(sqrt(0))
+
     # Should return 600
     print(sqrt(360000))
 
-    # Should return 12
-    print(sqrt(144))
+    # Should return 99
+    print(sqrt(9999))
 
     # Should raise an error
     print(sqrt(-1))
