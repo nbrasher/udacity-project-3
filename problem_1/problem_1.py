@@ -13,12 +13,23 @@ def initial_guess(n: int):
         return 6 * 10**((n_digits-1) // 2)
 
 def sqrt(n: int, guess: int = None):
+    """
+    Calculate the floored square root of a number
+
+    Args:
+       n(int): Number to find the floored squared root
+       guess(int): Optional integer guess for the square root
+    Returns:
+       int: Floored Square Root
+    """
     assert isinstance(n, int), 'Must be an integer'
     assert n > 0, 'Must be a positive integer'
     
-    # If no guess is supplied, get guess from above
+    # If no guess is supplied, get guess from initial_guess algorithm
     if not guess:
         guess = initial_guess(n)
+    else:
+        assert isinstance(guess, int) & (guess > 0)
     
     # Check if the guess is the answer, if not use the Babylonian method
     # to update the new guess and iterate
