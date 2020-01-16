@@ -2,42 +2,45 @@
 '''
 
 
-def find_pivot(l: list, start:int = 0) -> int:
+def find_pivot(l: list) -> int:
     # Find the location of the pivot element in a 
     # pivoted array via binary search
-
-    # If array is a single element, return address
-    if len(l) <= 1:
-        return start
+    start = 0
+    end = len(l) - 1
 
     # Find mid-point
-    mid = len(l) // 2
+    while start <= end:
+        mid = (start + end) // 2
+        
+        # The pivot is the one element that is unsorted
+        if l[mid] < l[mid-1]:
+            return mid
+        elif l[start] > l[mid]:
+            end = mid
+        else:    
+            start = mid
 
-    # If mid-point is pivot return
-    if l[mid] < l[mid-1]:
-        return start+mid
-    # Else continue to look for the pivot
-    elif l[0] > l[mid-1]:
-        return find_pivot(l[0:mid], start)
-    else:
-        return find_pivot(l[mid:], start+mid)
 
-def binary_search(l: list, value: int, start: int = 0) -> int:
-    # Vanilla binary search in a sorted list
-    if len(l) == 1:
-        if l[0] == value:
-            return start
-        else:
-            return -1
+def binary_search(l: list, value: int, pivot: int = 0) -> int:
+    # Binary search in a sorted list using index values
+    # rotated by a pivot value (if supplied)
+    n = len(l)
 
-    mid = len(l) // 2
+    start = 0
+    end = n - 1
 
-    if l[mid] == value:
-        return start+mid
-    elif l[mid] > value:
-        return binary_search(l[0:mid], value, start)
-    else:
-        return binary_search(l[mid:], value, start+mid)
+    while start <= end:
+        mid = (start + end) // 2
+        
+        # Rotate indices if a pivot is supplied
+        if l[(mid + pivot) % n] == value:
+            return (mid + pivot) % n
+        elif l[(mid + pivot) % n] > value:
+            end = mid-1
+        else:    
+            start = mid+1
+    
+    return -1
 
 def rotated_array_search(
     input_list: list, 
@@ -52,15 +55,8 @@ def rotated_array_search(
     """
     pivot = find_pivot(input_list)
 
-    # Un-pivot the list and use binary search
-    l = input_list[pivot:] + input_list[:pivot]
-    pos = binary_search(l, value)
-
-    # Return value in original array
-    if pos == -1:
-        return pos
-    else:
-        return (pos + pivot) % len(l)
+    # Use binary search using rotated array indices
+    return binary_search(input_list, value, pivot)
 
 
 if __name__ == '__main__':
