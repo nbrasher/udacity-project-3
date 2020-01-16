@@ -60,5 +60,8 @@ if __name__ == '__main__':
     # Should return 99
     print(sqrt(9999))
 
+    # Should return 31
+    print(sqrt(1000))
+
     # Should raise an error
     print(sqrt(-1))
