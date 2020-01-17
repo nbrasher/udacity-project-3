@@ -1,0 +1,5 @@
+# Problem 3: Rearrange Array Digits  
+
+This problem boils down to sorting an array of digits. The way to get the largest sum from the input list of digits is to put the largest number in the highest digit. That is for a list like [1, 2, 3, 4], the solution is 42, 31 (or equally 41, 32) because you have placed 4 and 3 in the tens digits, and 2 and 1 in the ones digits. Once the list of digits is in sorted order, the solution is a simple matter of taking the largest digits one at a time and forming new numbers.
+
+For this problem, I use a variant of merge sort to sort the elements in reverse (largest first) order. Then I construct numbers from the sorted digits as described above. The time compelxity of this approach is O(n log n) as merge sort is an O(n log n) algorithm. The process of forming the digits involves a single traverse of the sorted list and is thus O(n). Thus the time complexity of the entire function is also O(n log n). The space complexity of merge sort is O(n) thus the overall space compelxity is also O(n).
