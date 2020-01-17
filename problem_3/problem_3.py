@@ -1,5 +1,5 @@
 '''
-Problem 1: Rearrange Array Elements
+Problem 3: Rearrange Array Elements
 '''
 def reverse_merge(left: list, right: list) -> list:
     #Merge sorted arrays for merge sort in reverse order
