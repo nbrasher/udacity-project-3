@@ -1,0 +1,5 @@
+# Problem 7: Request Routing in a Web Server with a Trie
+
+The solution to this problem was a simple Trie with the extra structure of a handler. In this case I chose the parse the input path within the `RouteTrie` class by splitting on forward slash characters "/" and discarding any empty results (as happens with leading, trailing or repeated forward slashes).
+
+The time and complexity of traversing the Trie is best case O(1) and worst case O(n) where n is the number of paths and handlers. The best case, all words in the Trie have a common path (like '/home' and '/home/user') in which case the algorithm will only take as long as the longest path to traverse. In the worst case where no paths are shared (like with '/home/user' and '/other/path') then each path will be in a separate branch that must be traversed, taking both O(n) storage and time to traverse.
