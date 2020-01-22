@@ -10,6 +10,7 @@ def sort_012(input_list):
        input_list(list): List to be sorted
     """
     # Test that list elements are 0, 1 or 2
+    assert input_list, 'Must pass a non-empty array of 0, 1 or 2'
     assert all(isinstance(i, int) for i in input_list), 'Must pass an array of 0, 1 or 2'
     assert all(i<3 and i >= 0 for i in input_list), 'Must pass an array of 0, 1 or 2'
 
@@ -45,5 +46,8 @@ if __name__ == '__main__':
     # Should return [0, 0, 0]
     print(sort_012(test_list_3))
 
-    # Should raise an error
-    print(sort_012([4, 3]))
+    # Single digit, should return [1]
+    print(sort_012([1]))
+
+    # Empty list, Should raise an error
+    print(sort_012([]))

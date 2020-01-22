@@ -53,7 +53,16 @@ def rotated_array_search(
     Returns:
        int: Index or -1
     """
-    pivot = find_pivot(input_list)
+    # Test that list elements are integers
+    assert input_list, 'Must pass a non-empty array of integers'
+    assert all(isinstance(i, int) for i in input_list), 'Must pass an array of integers'
+
+    # Test if the array is sorted
+    if input_list[-1] > input_list[0]:
+        pivot = 0
+    # If not, find pivot point
+    else:
+        pivot = find_pivot(input_list)
 
     # Use binary search using rotated array indices
     return binary_search(input_list, value, pivot)
@@ -86,5 +95,8 @@ if __name__ == '__main__':
     # Should print -1
     print(rotated_array_search(test_list2, 5))
 
-    # Should print -1
-    print(rotated_array_search(test_list2, 4.5))
+    # Sorted and non-rotated array, should print 0
+    print(rotated_array_search([1, 2, 3, 4, 5], 1))
+
+    # Empty list, should raise an error
+    print(rotated_array_search([], 1))

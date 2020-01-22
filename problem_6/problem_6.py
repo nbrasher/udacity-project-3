@@ -8,6 +8,7 @@ def get_min_max(ints):
     Args:
        ints(list): list of integers containing one or more integers
     """
+    assert ints, 'Must pass a non-empty array of integers'
     assert all(isinstance(i, int) for i in ints), 'Must pass an array of integers'
     
     # Set the initial min and max to the first element
@@ -38,5 +39,8 @@ if __name__ == '__main__':
     # Should print 0, 0
     print(get_min_max(test_list_3))
 
-    # Should print 1, 6
-    print(get_min_max(['a', 'b']))
+    # Single digit, should print 1,1
+    print(get_min_max([1]))
+
+    # Should raise an error
+    print(get_min_max([]))

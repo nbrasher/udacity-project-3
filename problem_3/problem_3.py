@@ -50,8 +50,13 @@ def rearrange_digits(input_list: list) -> tuple:
        list: Two maximum sums
     """
     # Test that list elements are digits
+    assert input_list, 'Must pass a non-empty array of digits'
     assert all(isinstance(i, int) for i in input_list), 'Must pass an array of digits'
     assert all(i<10 and i >= 0 for i in input_list), 'Must pass an array of digits'
+
+    # If inpit is a single digit, return that digit
+    if len(input_list) == 1:
+        return input_list[0], None
 
     # Empty lists to hold final digits
     out1 = []
@@ -96,5 +101,8 @@ if __name__ == '__main__':
     # Should return 0, 0
     print(rearrange_digits([0, 0, 0, 0, 0, 0, 0]))
 
-    # Should raise an error
-    print(rearrange_digits(['a', 'b']))
+    # Single digit, should print 5, None
+    print(rearrange_digits([5]))
+
+    # Empty list, should raise an error
+    print(rearrange_digits([]))
